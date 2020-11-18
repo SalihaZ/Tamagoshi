@@ -15,7 +15,6 @@ public class TamaV2 {
 	private int tiredness = 0;
 	private int cleanliness = 10;
 	private int joy = 10;
-	private int fun = 10;
 	private int hangout = 5;
 	private int toilet = 0;
 
@@ -40,13 +39,17 @@ public class TamaV2 {
 
 	}
 
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
 	// Show the horse drawing
 
 	public void draw() {
 		System.out.println("Je suis un tamagotchi");
 	}
 
-//		Method which displays the features of the tamagotchi
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
+	// Method which displays the features of the tamagotchi
 
 	public void showState() {
 
@@ -58,7 +61,191 @@ public class TamaV2 {
 		System.out.println("");
 	}
 
-//		Method for the accessors and mutators of the tamagotchi attributes
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
+	// Method for all the actions to do for the Tamagotchi
+
+	// Method for feeding the Tamagotchi
+
+	public void meal() {
+
+		System.out.println("\t\t" + name + " " + "veut manger : ");
+		System.out.println("");
+		System.out.println("\t\t(1) une salade \n\t\t(2) un gateau \n\t\t(3) une viande");
+
+	}
+
+	public void feed() {
+		hunger -= 5;
+		if (hunger < 0) {
+			hunger = 0;
+
+			int userFeed;
+			this.meal();// méthod
+//				System.out.println("\t\t" + name + " " + "veut manger : ");
+//				System.out.println("");
+//				System.out.println("\t\t(1) une salade \n\t\t(2) un gateau \n\t\t(3) une viande");
+			userFeed = Clavier.lireInt();
+
+			switch (userFeed) {
+			case 1:
+				this.setLife(this.getLife() + 3);
+				this.setCleanliness(this.getCleanliness() + 2);
+				this.setToilet(this.getToilet() + 2);
+
+				break;
+
+			case 2:
+				this.setLife(this.getLife() + 2);
+				this.setCleanliness(this.getCleanliness() - 1);
+				this.setToilet(this.getToilet() + 3);
+				break;
+
+			case 3:
+				this.setLife(this.getLife() + 3);
+				this.setCleanliness(this.getCleanliness() - 2);
+				this.setToilet(this.getToilet() + 4);
+				break;
+
+			default:
+				reask();
+				feed();
+			}
+		}
+	}
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
+	// Method for walking the Tamagotchi
+	public void walk() {
+		int userChoice;
+		System.out.println("\t\t" + name + " " + " a envie de se balader !");
+		System.out.println("");
+		System.out.println("\t\t(1) Promenade en montagne \n\t\t(2) Aller au restaurant ");
+		userChoice = Clavier.lireInt();
+
+		switch (userChoice) {
+		case 1:
+			this.setHangout(this.getHangout() + 5);
+			this.setCleanliness(this.getCleanliness() + 1);
+			this.setToilet(this.getToilet() + 3);
+			break;
+
+		case 2:
+			this.setHangout(this.getHangout() + 4);
+			this.setCleanliness(this.getCleanliness() + 2);
+			this.setToilet(this.getToilet() + 3);
+			break;
+
+		default:
+			reask();
+			walk();
+		}
+	}
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
+	// Method for going to the toilet
+	public void toilet() {
+		int userToilet;
+		System.out.println("");
+		System.out.println("\t\t(1)" + name + " " + "veut aller aux toilettes (2)" + name + ""
+				+ " ne veut pas aller aux toilettes");
+		userToilet = Clavier.lireInt();
+
+		switch (userToilet) {
+
+		case 1:
+			this.setToilet(this.getToilet() - 5);
+			this.setCleanliness(this.getCleanliness() - 2);
+			this.setHangout(this.getHangout() - 1);
+
+			break;
+
+		case 2:
+			this.setToilet(0);
+			this.setCleanliness(this.getCleanliness() - 2);
+			this.setHangout(this.getHangout() - 1);
+			break;
+
+		default:
+			reask();
+			toilet();
+		}
+	}
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
+	// Method for washing the Tamogotchi
+	public void wash() {
+		int userWash;
+		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
+		System.out.println("");
+		System.out.println("\t\tC'est le moment de laver" + " " + name);
+		System.out.println("");
+		System.out.println("\t\t(1) lui prendre un bain \n\t\t(2) lui faire sa toilette quotidienne ");
+		System.out.println("");
+		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
+		userWash = Clavier.lireInt();
+
+		switch (userWash) {
+		case 1:
+			this.setCleanliness(this.getCleanliness() + 4);
+			this.setHangout(this.getHangout() - 1);
+			break;
+
+		case 2:
+			this.setCleanliness(this.getCleanliness() + 2);
+			this.setHangout(this.getHangout() - 1);
+
+			break;
+
+		default:
+			reask();
+			wash();
+		}
+	}
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
+	// Method to sleep the Tamagotchi
+	public void sleep() {
+		int userSleep;
+		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
+		System.out.println("");
+		System.out.println("\t\tC'est l'heure de coucher" + " " + name);
+		System.out.println("");
+		System.out.println("\t\t(1) Faire un petit dodo \n\t\t(2) Faire un grand dodo");
+		System.out.println("");
+		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
+		userSleep = Clavier.lireInt();
+
+		switch (userSleep) {
+		case 1:
+
+			this.setCleanliness(this.getCleanliness() - 2);
+			this.setHangout(this.getHangout() - 2);
+			this.setToilet(this.getToilet() + 2);
+			break;
+
+		case 2:
+
+			this.setCleanliness(this.getCleanliness() - 3);
+			this.setHangout(this.getHangout() - 2);
+			this.setToilet(this.getToilet() + 3);
+			break;
+
+		default:
+			reask();
+			sleep();
+		}
+	}
+	// *#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#
+
+	// Method for asking again if the user make a mistake
+	public void reask() {
+		System.out.println("Je n'ai pas compris ce que tu veux faire!");
+		System.out.println("");
+		System.out.println("*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
+	}
+
+	// Method for the accessors and mutators of the tamagotchi attributes
 
 	public void setName(String name) {
 		this.name = name;
@@ -204,193 +391,8 @@ public class TamaV2 {
 		this.toilet = 0;
 	}
 
-	public int getFun() {
-		return fun;
-	}
-
-	public void setFun(int fun) {
-		this.fun = fun;
-	}
-
-	// Method for all the actions to do for the Tamagotchi
-
-	// Method for feeding the Tamagotchi
-
-	public void meal() {
-
-		System.out.println("\t\t" + name + " " + "veut manger : ");
-		System.out.println("");
-		System.out.println("\t\t(1) une salade \n\t\t(2) un gateau \n\t\t(3) une viande");
-
-	}
-
-	public void feed() {
-		hunger -= 5;
-		if (hunger < 0) {
-			hunger = 0;
-
-			int userFeed;
-			this.meal();// méthod
-//				System.out.println("\t\t" + name + " " + "veut manger : ");
-//				System.out.println("");
-//				System.out.println("\t\t(1) une salade \n\t\t(2) un gateau \n\t\t(3) une viande");
-			userFeed = Clavier.lireInt();
-
-			switch (userFeed) {
-			case 1:
-				this.setLife(this.getLife() + 3);
-				this.setCleanliness(this.getCleanliness() + 2);
-				this.setToilet(this.getToilet() + 2);
-
-				break;
-
-			case 2:
-				this.setLife(this.getLife() + 2);
-				this.setCleanliness(this.getCleanliness() - 1);
-				this.setToilet(this.getToilet() + 3);
-				break;
-
-			case 3:
-				this.setLife(this.getLife() + 3);
-				this.setCleanliness(this.getCleanliness() - 2);
-				this.setToilet(this.getToilet() + 4);
-				break;
-
-			default:
-				reask();
-				feed();
-			}
-		}
-	}
-
-	// Method for walking the Tamagotchi
-	public void walk() {
-		int userChoice;
-		System.out.println("\t\t" + name + " " + " a envie de se balader !");
-		System.out.println("");
-		System.out.println("\t\t(1) Promenade en montagne \n\t\t(2) Aller au restaurant ");
-		userChoice = Clavier.lireInt();
-
-		switch (userChoice) {
-		case 1:
-			this.setHangout(this.getHangout() + 5);
-			this.setCleanliness(this.getCleanliness() + 1);
-			this.setToilet(this.getToilet() + 3);
-			break;
-
-		case 2:
-			this.setHangout(this.getHangout() + 4);
-			this.setCleanliness(this.getCleanliness() + 2);
-			this.setToilet(this.getToilet() + 3);
-			break;
-
-		default:
-			reask();
-			walk();
-		}
-	}
-
-	// Method for going to the toilet
-	public void toilet() {
-		int userToilet;
-		System.out.println("");
-		System.out.println("\t\t(1)" + name + " " + "veut aller aux toilettes (2)" + name + ""
-				+ " ne veut pas aller aux toilettes");
-		userToilet = Clavier.lireInt();
-
-		switch (userToilet) {
-
-		case 1:
-			this.setToilet(this.getToilet() - 5);
-			this.setCleanliness(this.getCleanliness() - 2);
-			this.setHangout(this.getHangout() - 1);
-
-			break;
-
-		case 2:
-			this.setToilet(0);
-			this.setCleanliness(this.getCleanliness() - 2);
-			this.setHangout(this.getHangout() - 1);
-			break;
-
-		default:
-			reask();
-			toilet();
-		}
-	}
-
-	// Method for washing the Tamogotchi
-	public void wash() {
-		int userWash;
-		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
-		System.out.println("");
-		System.out.println("\t\tC'est le moment de laver" + " " + name);
-		System.out.println("");
-		System.out.println("\t\t(1) lui prendre un bain \n\t\t(2) lui faire sa toilette quotidienne ");
-		System.out.println("");
-		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
-		userWash = Clavier.lireInt();
-
-		switch (userWash) {
-		case 1:
-			this.setCleanliness(this.getCleanliness() + 4);
-			this.setHangout(this.getHangout() - 1);
-			break;
-
-		case 2:
-			this.setCleanliness(this.getCleanliness() + 2);
-			this.setHangout(this.getHangout() - 1);
-
-			break;
-
-		default:
-			reask();
-			wash();
-		}
-	}
-
-	// Method to sleep the Tamagotchi
-	public void sleep() {
-		int userSleep;
-		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
-		System.out.println("");
-		System.out.println("\t\tC'est l'heure de coucher" + " " + name);
-		System.out.println("");
-		System.out.println("\t\t(1) Faire un petit dodo \n\t\t(2) Faire un grand dodo");
-		System.out.println("");
-		System.out.println("\t\t*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
-		userSleep = Clavier.lireInt();
-
-		switch (userSleep) {
-		case 1:
-
-			this.setCleanliness(this.getCleanliness() - 2);
-			this.setHangout(this.getHangout() - 2);
-			this.setToilet(this.getToilet() + 2);
-			break;
-
-		case 2:
-
-			this.setCleanliness(this.getCleanliness() - 3);
-			this.setHangout(this.getHangout() - 2);
-			this.setToilet(this.getToilet() + 3);
-			break;
-
-		default:
-			reask();
-			sleep();
-		}
-	}
-
-	// Method for asking again if the user make a mistake
-	public void reask() {
-		System.out.println("Je n'ai pas compris ce que tu veux faire!");
-		System.out.println("");
-		System.out.println("*#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#**#*#*#*");
-	}
-
 	/*
-	 * These are some actions that could be added for a Tamagotchi V.3.
+	 * These are some actions that could be added for a new version Tamagotchi V.3.
 	 */
 
 	// Express its mood expl.
